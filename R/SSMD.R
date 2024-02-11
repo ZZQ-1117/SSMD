@@ -17,12 +17,12 @@
   
   utils::data(Mouse_Brain_labeling_matrix, package = pkgname, envir = parent.env(environment()))
   Mouse_Brain_labeling_matrix <- SSMD::Mouse_Brain_labeling_matrix
-  colnames(Mouse_Brain_labeling_matrix) <- c("astrocyte", "endothelial", "ependymal", "stromal_like_cell", "oligodendrocyte", "micro_glial", "glial_cell", "neuron", "Schwann")
+  colnames(Mouse_Brain_labeling_matrix) <- c("Astrocyte", "Endothelial", "Ependymal", "Stromal", "Oligodendrocyte", "Microglial", "Glial", "Neuron", "Schwann")
   assign("Mouse_Brain_labeling_matrix", Mouse_Brain_labeling_matrix, envir = parent.env(environment()))
 
   utils::data(Mouse_Brain_core_marker, package = pkgname, envir = parent.env(environment()))
   Mouse_Brain_core_marker <- SSMD::Mouse_Brain_core_marker
-  names(Mouse_Brain_core_marker) <- c("ependymal", "micro_glial", "oligodendrocyte", "stromal_like_cell", "endothelial", "Schwann", "glial_cell", "neuron", "astrocyte")
+  names(Mouse_Brain_core_marker) <- c("Ependymal", "Microglial", "Oligodendrocyte", "SMC", "Endothelial", "Schwann", "Glial", "Neuron", "Astrocyte")
   assign("Mouse_Brain_core_marker", Mouse_Brain_core_marker, envir = parent.env(environment()))
 
   
