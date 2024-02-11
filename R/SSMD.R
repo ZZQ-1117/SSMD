@@ -22,7 +22,7 @@
 
   utils::data(Mouse_Brain_core_marker, package = pkgname, envir = parent.env(environment()))
   Mouse_Brain_core_marker <- SSMD::Mouse_Brain_core_marker
-  names(Mouse_Brain_core_marker) <- c("Ependymal", "Microglial", "Oligodendrocyte", "SMC", "Endothelial", "Schwann", "Glial", "Neuron", "Astrocyte")
+  names(Mouse_Brain_core_marker) <- c("Ependymal", "Microglial", "Oligodendrocyte", "Stromal", "Endothelial", "Schwann", "Glial", "Neuron", "Astrocyte")
   assign("Mouse_Brain_core_marker", Mouse_Brain_core_marker, envir = parent.env(environment()))
 
   
