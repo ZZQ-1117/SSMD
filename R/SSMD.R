@@ -17,11 +17,14 @@
   
   utils::data(Mouse_Brain_labeling_matrix, package = pkgname, envir = parent.env(environment()))
   Mouse_Brain_labeling_matrix <- SSMD::Mouse_Brain_labeling_matrix
+  colnames(Mouse_Brain_labeling_matrix) <- c("Astrocyte", "Endothelial", "Ependymal", "Stromal", "Oligodendrocyte", "Microglial", "Glial", "Neuron", "Schwann")
   assign("Mouse_Brain_labeling_matrix", Mouse_Brain_labeling_matrix, envir = parent.env(environment()))
-  
+
   utils::data(Mouse_Brain_core_marker, package = pkgname, envir = parent.env(environment()))
   Mouse_Brain_core_marker <- SSMD::Mouse_Brain_core_marker
+  names(Mouse_Brain_core_marker) <- c("Ependymal", "Microglial", "Oligodendrocyte", "Stromal", "Endothelial", "Schwann", "Glial", "Neuron", "Astrocyte")
   assign("Mouse_Brain_core_marker", Mouse_Brain_core_marker, envir = parent.env(environment()))
+
   
   utils::data(Mouse_Blood_core_marker, package = pkgname, envir = parent.env(environment()))
   Mouse_Blood_core_marker <- SSMD::Mouse_Blood_core_marker
@@ -30,6 +33,7 @@
   utils::data(Mouse_Blood_labeling_matrix, package = pkgname, envir = parent.env(environment()))
   Mouse_Blood_labeling_matrix <- SSMD::Mouse_Blood_labeling_matrix
   assign("Mouse_Blood_labeling_matrix", Mouse_Blood_labeling_matrix, envir = parent.env(environment()))
+  
 }
 
 
@@ -137,8 +141,8 @@ SSMD <- function(bulk_data,tissue) {
     marker_stats1_uni=Mouse_Cancer_labeling_matrix
   }
   if (tissue=='Central Nervous System'){
-    tg_core_marker_set=Mouse_Brain_core_marker
-    marker_stats1_uni=Mouse_Brain_labeling_matrix
+    tg_core_marker_set = SSMD::Mouse_Brain_core_marker
+    marker_stats1_uni = SSMD::Mouse_Brain_labeling_matrix
   }  
   if (tissue=='Hematopoietic System'){
     tg_core_marker_set=Mouse_hematopoietic_core_marker
