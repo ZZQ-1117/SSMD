@@ -33,6 +33,10 @@
   utils::data(Mouse_Blood_labeling_matrix, package = pkgname, envir = parent.env(environment()))
   Mouse_Blood_labeling_matrix <- SSMD::Mouse_Blood_labeling_matrix
   assign("Mouse_Blood_labeling_matrix", Mouse_Blood_labeling_matrix, envir = parent.env(environment()))
+
+  utils::data(Mouse_human_mapping, package = pkgname, envir = parent.env(environment()))
+  Mouse_human_mapping <- SSMD::Mouse_human_mapping
+  assign("Mouse_human_mapping", Mouse_human_mapping, envir = parent.env(environment()))
   
 }
 
@@ -134,11 +138,39 @@ SSMD <- function(bulk_data,tissue) {
     return(Base_all)
   }
   
-  
+
+  # converting mouse symbol into human symbol
+  tran_core <- function(core) {
+    mylist <- list()
+	for (z in names(core)){
+	  Mouse_human_mapping <- as.data.frame(Mouse_human_mapping)
+	  values = core[[z]]
+	  human_core <- subset(Mouse_human_mapping, V5 %in% values)
+	  human_core <- distinct(human_core, V1,.keep_all=TRUE)
+	  mylist[[z]] <- human_core$V1
+	}
+	return(mylist)
+  }
+
+  tran_labeling <- function(labeling) {
+	  Mouse_human_mapping <- as.data.frame(Mouse_human_mapping)
+	  labeling_df <- as.data.frame(labeling)
+	  merged_data <- merge(labeling_df, Mouse_human_mapping, by.x = "row.names", by.y = "V5", all = FALSE)
+	  merged_data <- distinct(merged_data, V1,.keep_all=TRUE)
+	  rownames(merged_data) <- merged_data$V1
+	  merged_data <- merged_data[, colnames(labeling)]
+	  merged_matrix <- as.matrix(merged_data)
+	return(merged_matrix)
+  }
+
   #################
   if (tissue=='Inflammatory'){
     tg_core_marker_set=Mouse_Cancer_core_marker
     marker_stats1_uni=Mouse_Cancer_labeling_matrix
+  }
+  if (tissue=='Inflammatory_h'){
+    tg_core_marker_set=tran_core(Mouse_Cancer_core_marker)
+    marker_stats1_uni=tran_labeling(Mouse_Cancer_labeling_matrix)
   }
   if (tissue=='Central Nervous System'){
     tg_core_marker_set = SSMD::Mouse_Brain_core_marker
@@ -152,6 +184,10 @@ SSMD <- function(bulk_data,tissue) {
     tg_core_marker_set=Mouse_Blood_core_marker
     marker_stats1_uni=Mouse_Blood_labeling_matrix
   } 
+  if (tissue=='Blood_h'){
+    tg_core_marker_set=tran_core(Mouse_Blood_core_marker)
+    marker_stats1_uni=tran_labeling(Mouse_Blood_labeling_matrix)
+  }
   cell_type = names(tg_core_marker_set)
   i = 1
   intersect_marker1 = vector("list")
