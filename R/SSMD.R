@@ -176,9 +176,17 @@ SSMD <- function(bulk_data,tissue) {
     tg_core_marker_set = SSMD::Mouse_Brain_core_marker
     marker_stats1_uni = SSMD::Mouse_Brain_labeling_matrix
   }  
+  if (tissue=='Central Nervous System_h'){
+    tg_core_marker_set = tran_core(SSMD::Mouse_Brain_core_marker)
+    marker_stats1_uni = tran_labeling(SSMD::Mouse_Brain_labeling_matrix)
+  } 
   if (tissue=='Hematopoietic System'){
     tg_core_marker_set=Mouse_hematopoietic_core_marker
     marker_stats1_uni=Mouse_hematopoietic_labeling_matrix
+  }
+  if (tissue=='Hematopoietic System_h'){
+    tg_core_marker_set=tran_core(Mouse_hematopoietic_core_marker)
+    marker_stats1_uni=tran_labeling(Mouse_hematopoietic_labeling_matrix)
   }
   if (tissue=='Blood'){
     tg_core_marker_set=Mouse_Blood_core_marker
